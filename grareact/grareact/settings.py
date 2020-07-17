@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ingredients.apps.IngredientsConfig'
+    'ingredients.apps.IngredientsConfig',
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
