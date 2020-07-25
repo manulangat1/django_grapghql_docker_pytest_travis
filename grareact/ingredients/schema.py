@@ -38,9 +38,8 @@ class Query(object):
 
     def resolve_all_ingredients(self,info,**kwargs):
         return Ingredient.objects.select_related('category').all()
-
     def resolve_all_post(self,info,**kwargs):
-        return Post.objects.select_related('Tag').all()
+        return Post.objects.all()
     def resolve_all_tag(self,info,**kwargs):
         return Tag.objects.all()
     def resolve_category(self,info,**kwargs):
