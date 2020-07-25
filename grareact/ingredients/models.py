@@ -16,3 +16,16 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    notes = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+class Tag(models.Model):
+    name = models.CharField(max_length=400)
+
+    def __str__(self):
+        return self.name
