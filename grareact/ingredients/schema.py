@@ -22,6 +22,7 @@ class TagType(DjangoObjectType):
 
 class Query(object):
     category = graphene.Field(CategoryType,id=graphene.Int(),name=graphene.String())
+    post = graphene.Field(PostType,id=graphene.Int())
     all_categories = graphene.List(CategoryType)
     all_post = graphene.List(PostType)
     all_tag = graphene.List(TagType)
@@ -42,6 +43,11 @@ class Query(object):
         return Post.objects.all()
     def resolve_all_tag(self,info,**kwargs):
         return Tag.objects.all()
+    def resolve_post(self,info,**kwargs):
+        id = kwargs.get('id')
+        if id is not None:
+            return Post.objects.get(pk=id)
+        return None
     def resolve_category(self,info,**kwargs):
         id = kwargs.get('id')
         name = kwargs.get('name')
