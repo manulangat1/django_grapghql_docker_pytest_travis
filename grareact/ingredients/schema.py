@@ -74,3 +74,17 @@ class Query(object):
             return Ingredient.objects.get(name=name)
 
         return None
+
+class CreatePost(graphene.Mutation):
+    id = graphene.Int()
+    title = graphene.Int()
+    notes = graphene.String()
+
+    class Arguements:
+        title = graphene.Int()
+        notes = graphene.String()
+
+    # def mutate(self,info,title,notes):
+    #     post = Post(title=title,notes=notes)
+    #     post.save()
+    #     return CreatePost
