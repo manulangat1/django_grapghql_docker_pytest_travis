@@ -86,14 +86,13 @@ class PostInput(graphene.InputObjectType):
     notes = graphene.String()
 
 class CreatePost(graphene.Mutation):
-    # id = graphene.Int()
-    # title = graphene.Int()
-    # notes = graphene.String()
-
-    class Arguements:
+    class Arguments:
         input = PostInput(required=True)
+        # # id = graphene.Int()
+        # title = graphene.Int()
+        # notes = graphene.String()
     post = graphene.Field(PostType)
-    def mutate(self,info,title,notes):
+    def mutate(self,info,input=None):
         tags = []
         for tag in input.tags:
             tagS = Tag.objects.get(pk=tag.id)
@@ -101,5 +100,11 @@ class CreatePost(graphene.Mutation):
                 tags.append(tagS)
             post_instance = Post(title=input.title,notes=input.notes)
             post_instance.save()
-            post_instance.actors.set(tagS)
+            print(tags)
+            post_instance.tag.add(tagS)
             return CreatePost(post=post_instance)
+
+
+
+class Mutation(graphene.ObjectType):
+    create_post = CreatePost.Field()
