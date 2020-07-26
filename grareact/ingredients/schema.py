@@ -75,16 +75,31 @@ class Query(object):
 
         return None
 
-class CreatePost(graphene.Mutation):
+class TagInput(graphene.InputObjectType):
     id = graphene.Int()
-    title = graphene.Int()
+    name = graphene.String()
+
+class PostInput(graphene.InputObjectType):
+    id = graphene.Int()
+    title = graphene.String()
+    tags = graphene.List(TagInput)
     notes = graphene.String()
 
-    class Arguements:
-        title = graphene.Int()
-        notes = graphene.String()
+class CreatePost(graphene.Mutation):
+    # id = graphene.Int()
+    # title = graphene.Int()
+    # notes = graphene.String()
 
-    # def mutate(self,info,title,notes):
-    #     post = Post(title=title,notes=notes)
-    #     post.save()
-    #     return CreatePost
+    class Arguements:
+        input = PostInput(required=True)
+    post = graphene.Field(PostType)
+    def mutate(self,info,title,notes):
+        tags = []
+        for tag in input.tags:
+            tagS = Tag.objects.get(pk=tag.id)
+            if tags is not None:
+                tags.append(tagS)
+            post_instance = Post(title=input.title,notes=input.notes)
+            post_instance.save()
+            post_instance.actors.set(tagS)
+            return CreatePost(post=post_instance)
