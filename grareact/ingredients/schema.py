@@ -104,7 +104,26 @@ class CreatePost(graphene.Mutation):
             post_instance.tag.add(tagS)
             return CreatePost(post=post_instance)
 
+class UpdatePost(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+        input = PostInput(required=False)
+    post = graphene.Field(PostType)
 
+    def mutate(self,info,id,input=None):
+        tags = []
+        post_instance = Post.objects.get(pk=id)
+        if post_instance:
+            for tag in input.tags:
+                tagS = Tag.objects.get(pk=tag.id)
+                if tagS is not None:
+                    tags.append(tagS)
+            post_instance.title = input.title
+            post_instance.notes = input.notes
+            post_instance.save()
+            post_instance.tag.set(tags)
+            return UpdatePost(post=post_instance)
 
 class Mutation(graphene.ObjectType):
     create_post = CreatePost.Field()
+    update_post = UpdatePost.Field()
