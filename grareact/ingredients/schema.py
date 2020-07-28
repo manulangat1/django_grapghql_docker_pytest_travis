@@ -84,7 +84,7 @@ class PostInput(graphene.InputObjectType):
     title = graphene.String()
     tags = graphene.List(TagInput)
     notes = graphene.String()
-
+# class TagInput
 class CreatePost(graphene.Mutation):
     class Arguments:
         input = PostInput(required=True)
@@ -124,6 +124,30 @@ class UpdatePost(graphene.Mutation):
             post_instance.tag.set(tags)
             return UpdatePost(post=post_instance)
 
+
+class TagPost(graphene.Mutation):
+    class Arguments:
+        input = TagInput(required=True)
+
+    tag = graphene.Field(TagType)
+
+    def mutate(self,info,input=None):
+        tag_instance = Tag(name=input.name)
+        tag_instance.save()
+        return TagPost(tag=tag_instance)
+
+class TagUpdate(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+        input = TagInput(required=True)
+    tag = graphene.Field(TagType)
+    def mutate(self,info,id,input=None):
+        tag_instance = Tag.objects.get(pk=id)
+        if tag_instance:
+            tag_instance.name = input.name
+            return TagUpdate(tag=tag_instance)
+        return "Not Found"
 class Mutation(graphene.ObjectType):
     create_post = CreatePost.Field()
     update_post = UpdatePost.Field()
+    tag_post = TagPost.Field()
