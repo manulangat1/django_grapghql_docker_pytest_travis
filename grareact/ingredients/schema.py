@@ -88,9 +88,6 @@ class PostInput(graphene.InputObjectType):
 class CreatePost(graphene.Mutation):
     class Arguments:
         input = PostInput(required=True)
-        # # id = graphene.Int()
-        # title = graphene.Int()
-        # notes = graphene.String()
     post = graphene.Field(PostType)
     def mutate(self,info,input=None):
         tags = []
