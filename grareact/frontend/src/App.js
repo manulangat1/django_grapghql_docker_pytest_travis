@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import LinkList from './components/LinkList'
 import Post from './components/Post'
+import Tags from './components/Tags'
 import Ingredients from './components/Ingredients'
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
@@ -29,6 +30,8 @@ function App() {
       <Ingredients />
       <h1>Post</h1>
       <Post />
+      <hr></hr>
+      <Tags />
     </section>
     </ApolloProvider>
     </div>

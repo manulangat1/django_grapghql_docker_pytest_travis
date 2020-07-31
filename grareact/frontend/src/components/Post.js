@@ -36,7 +36,6 @@ class Post extends React.Component {
                                             { link.tag.map(t => (
                                                 <div>
                                                     <h1>{t.name}</h1>
-                                                    <p>hey</p>
                                                 </div>
                                             ))}
                                        </div>
