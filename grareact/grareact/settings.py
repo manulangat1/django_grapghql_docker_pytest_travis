@@ -27,7 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ingredients.apps.IngredientsConfig',
+    'graphene_django',
 ]
+GRAPHENE = {
+    'SCHEMA': 'grareact.schema.schema'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
