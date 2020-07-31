@@ -33,13 +33,13 @@ class LinkList extends Component {
 
     return (
       <div>
-    return (
+
       <Query query={FEED_QUERY}>
         {({ loading, error, data }) => {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
-    
-          const linksToRender = data.feed.links
+          console.log(data)
+          const linksToRender = data.allCategories
     
           return (
             <div>
