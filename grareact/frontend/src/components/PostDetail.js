@@ -31,7 +31,7 @@ class PostDetail extends React.Component{
                                         <h1>{postD && postD.name}</h1>
                                         {postD.ingredients.map(ing => (
                                             <div>
-                                                <h1>{ing.name}</h1>
+                                                <p>{ing.name}</p>
                                             </div>
                                         ))}
                                     </div>
