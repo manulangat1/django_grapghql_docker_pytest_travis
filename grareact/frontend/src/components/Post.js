@@ -10,8 +10,11 @@ class Post extends React.Component {
             query{
                 allPost{
                     id
-                    name
-                    notes
+                    title
+                    tag{
+                               id
+                               name
+                             }
                 }
             }
     `
@@ -28,8 +31,14 @@ class Post extends React.Component {
                                {
                                    postLinks.map(link => (
                                        <div>
-                                           <h1>{link.name}</h1>
+                                           <h1>{link.title}</h1>
                                             <p>{link.notes}</p>
+                                            { link.tag.map(t => (
+                                                <div>
+                                                    <h1>{t.name}</h1>
+                                                    <p>hey</p>
+                                                </div>
+                                            ))}
                                        </div>
                                    ))
                                }
