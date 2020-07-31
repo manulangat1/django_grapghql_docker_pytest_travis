@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LinkList from './components/LinkList'
+import Ingredients from './components/Ingredients'
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
@@ -24,6 +25,7 @@ function App() {
       <ApolloProvider client={client}>
     <section>
       <LinkList />
+      <Ingredients />
     </section>
     </ApolloProvider>
     </div>
